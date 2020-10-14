@@ -148,6 +148,46 @@ void TestConexiones::testAll()
 }
 
 
+//· TestEstados -------------------------------------------------------------->
+
+class TestEstados
+{
+  private:
+    Semaforo sem1;
+  public:
+    void begin(byte r, byte a, byte v);
+    void testR();
+    void testA();
+    void testV();
+    void testRA();
+};
+
+void TestEstados::begin(byte r, byte a, byte v)
+{
+  sem1.begin(r, a, v);
+}
+
+void TestEstados::testR()
+{
+  sem1.setR();
+}
+
+void TestEstados::testR()
+{
+  sem1.setA();
+}
+
+void TestEstados::testR()
+{
+  sem1.setV();
+}
+
+void TestEstados::testR()
+{
+  sem1.setRA();
+}
+
+
 
 //* ===========================================================================
 //* PROGRAMA ARDUINO
