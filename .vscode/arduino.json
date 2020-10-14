@@ -1,0 +1,6 @@
+{
+    "sketch": "testLuces\\testLuces.ino",
+    "board": "arduino:avr:nano",
+    "configuration": "cpu=atmega328old",
+    "programmer": "AVRISP mkII"
+}
