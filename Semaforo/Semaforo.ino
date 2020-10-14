@@ -155,9 +155,9 @@ TestConexiones prueba;
 void setup()
 {
   prueba.begin();
+  prueba.testAll();
 }
 
 void loop()
 {
-  prueba.testAll();
 }
