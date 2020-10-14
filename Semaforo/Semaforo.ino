@@ -14,11 +14,17 @@ class Timer
 private:
   int base_time;
 public:
-  Timer(int mult);
+  Timer();
+  void SetBaseTime(int mult);
   void Stop(int x);
 };
 
-Timer::Timer(int mult)
+Timer::Timer()
+{
+  base_time = 1000;  // ms a seg.
+}
+
+void Timer::SetBaseTime(int mult)
 {
   base_time = mult * 1000;
 }
