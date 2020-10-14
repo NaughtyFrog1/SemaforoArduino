@@ -73,6 +73,10 @@ class Semaforo {
     void begin(byte r, byte a, byte v);
     void allOn();
     void allOff();
+    void setR();
+    void setA();
+    void setV();
+    void setRA();
 };
 
 void Semaforo::begin(byte r, byte a, byte v)
@@ -166,17 +170,17 @@ void TestEstados::testR()
   sem1.setR();
 }
 
-void TestEstados::testR()
+void TestEstados::testA()
 {
   sem1.setA();
 }
 
-void TestEstados::testR()
+void TestEstados::testV()
 {
   sem1.setV();
 }
 
-void TestEstados::testR()
+void TestEstados::testRA()
 {
   sem1.setRA();
 }
@@ -187,15 +191,26 @@ void TestEstados::testR()
 //* PROGRAMA ARDUINO
 //* ===========================================================================
 
-
+Timer tm;
 TestConexiones conex;
+TestEstados est;
 
 void setup()
 {
   conex.begin(14, 15, 16, 17, 18, 19, 12, 11, 10, 9, 8, 7);
   conex.testAll();
+
+  est.begin(14, 15, 16);
 }
 
 void loop()
 {
+  est.testR();
+  tm.Stop(1);
+  est.testRA();
+  tm.Stop(1);
+  est.testV();
+  tm.Stop(1);
+  est.testA();
+  tm.Stop(1);
 }
