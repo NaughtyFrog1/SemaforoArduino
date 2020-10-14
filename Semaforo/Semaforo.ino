@@ -95,15 +95,61 @@ void Semaforo::allOff()
 
 
 //* ===========================================================================
+//* TESTS
+//* ===========================================================================
+
+
+class TestConexiones
+{
+  private:
+    Semaforo sem1, sem2, sem3, sem4;
+  public:
+    void begin();
+    void testAll();
+};
+
+void TestConexiones::begin()
+{
+  sem1.begin(14, 15, 16);
+  sem2.begin(17, 18, 19);
+  sem3.begin(12, 11, 10);
+  sem4.begin(9, 8, 7);
+}
+
+void TestConexiones::testAll()
+{
+  sem1.allOn();
+  delay(1000);
+  sem1.allOff();
+
+  sem2.allOn();
+  delay(1000);
+  sem2.allOff();
+
+  sem3.allOn();
+  delay(1000);
+  sem3.allOff();
+
+  sem4.allOn();
+  delay(1000);
+  sem4.allOff();
+}
+
+
+
+//* ===========================================================================
 //* PROGRAMA ARDUINO
 //* ===========================================================================
 
 
+TestConexiones prueba;
+
 void setup()
 {
+  prueba.begin();
 }
 
 void loop()
 {
-
+  prueba.testAll();
 }
