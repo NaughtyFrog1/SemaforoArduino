@@ -18,7 +18,8 @@ class Semaforo {
   private:
     // ...
   public:
-    //...
+    LuzSemaforo rojo, ambar, verde;
+    void begin(byte r, byte a, byte v);
 };
 
 
@@ -49,7 +50,12 @@ void LuzSemaforo::off()
 
 //· Semaforo ----------------------------------------------------------------->
 
-// ...
+void Semaforo::begin(byte r, byte a, byte v)
+{
+  rojo.begin(r);
+  ambar.begin(a);
+  verde.begin(v);
+}
 
 
 
@@ -57,12 +63,14 @@ void LuzSemaforo::off()
 //* PROGRAMA ARDUINO
 //* ===========================================================================
 
+Semaforo sem1;
+
 void setup()
 {
-
+  sem1.begin(12, 11, 10);
 }
 
 void loop()
 {
-
+  sem1.verde.on();
 }
