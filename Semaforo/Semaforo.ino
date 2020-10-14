@@ -21,7 +21,7 @@ public:
 
 Timer::Timer()
 {
-  base_time = 1000;  // ms a seg.
+  base_time = 1000;  // milisegundos a segundos
 }
 
 void Timer::SetBaseTime(int mult)
@@ -114,36 +114,43 @@ byte Semaforo::getSemaforos()
 class TestConexiones
 {
   private:
+    Timer t;
     Semaforo sem1, sem2, sem3, sem4;
   public:
-    void begin();
+    void begin(byte r1, byte a1, byte v1, 
+               byte r2, byte a2, byte v2,
+               byte r3, byte a3, byte v3,
+               byte r4, byte a4, byte v4);
     void testAll();
 };
 
-void TestConexiones::begin()
+void TestConexiones::begin(byte r1, byte a1, byte v1, 
+                           byte r2, byte a2, byte v2,
+                           byte r3, byte a3, byte v3,
+                           byte r4, byte a4, byte v4)
 {
-  sem1.begin(14, 15, 16);
-  sem2.begin(17, 18, 19);
-  sem3.begin(12, 11, 10);
-  sem4.begin(9, 8, 7);
+  sem1.begin(r1, a1, v1);
+  sem2.begin(r2, a2, v2);
+  sem3.begin(r3, a3, v3);
+  sem4.begin(r4, a4, v4);
 }
 
 void TestConexiones::testAll()
 {
   sem1.allOn();
-  delay(1000);
+  t.Stop(1);
   sem1.allOff();
 
   sem2.allOn();
-  delay(1000);
+  t.Stop(1);
   sem2.allOff();
 
   sem3.allOn();
-  delay(1000);
+  t.Stop(1);
   sem3.allOff();
 
   sem4.allOn();
-  delay(1000);
+  t.Stop(1);
   sem4.allOff();
 }
 
@@ -158,7 +165,7 @@ TestConexiones prueba;
 
 void setup()
 {
-  prueba.begin();
+  prueba.begin(14, 15, 16, 17, 18, 19, 12, 11, 10, 9, 8, 7);
   prueba.testAll();
 }
 
