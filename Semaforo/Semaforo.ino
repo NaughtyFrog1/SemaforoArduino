@@ -137,7 +137,7 @@ void TestConexiones::begin(byte r1, byte a1, byte v1,
 
 void TestConexiones::testAll()
 {
-  for (int i = 0; i <= 4; i++)
+  for (int i = 0; i < 4; i++)
   {
     Semaforo semaforo[4] = {sem1, sem2, sem3, sem4};
 
