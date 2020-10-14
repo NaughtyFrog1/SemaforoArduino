@@ -13,21 +13,19 @@ class Timer
 {
 private:
   int base_time;
-  int steps;
 public:
-  Timer(int time);
-  void Step();
+  Timer(int mult);
+  void Stop(int x);
 };
 
-Timer::Timer(int time)
+Timer::Timer(int mult)
 {
-  base_time = time;
+  base_time = mult * 1000;
 }
 
-void Timer::Step()
+void Timer::Stop(int time)
 {
-  ++steps;
-  delay(base_time);
+  delay(time * base_time);
 }
 
 
