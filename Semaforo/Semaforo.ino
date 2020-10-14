@@ -185,6 +185,31 @@ void TestEstados::testRA()
   sem1.setRA();
 }
 
+void Semaforo::setR()
+{
+  allOff();
+  rojo.on();
+}
+
+void Semaforo::setA()
+{
+  allOff();
+  ambar.on();
+}
+
+void Semaforo::setV()
+{
+  allOff();
+  verde.on();
+}
+
+void Semaforo::setRA()
+{
+  allOff();
+  rojo.on();
+  ambar.on();
+}
+
 
 
 //* ===========================================================================
