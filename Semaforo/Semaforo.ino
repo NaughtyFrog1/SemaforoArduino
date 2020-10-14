@@ -69,6 +69,7 @@ class Semaforo {
     void begin(byte r, byte a, byte v);
     void allOn();
     void allOff();
+    byte getSemaforos();
 };
 
 void Semaforo::begin(byte r, byte a, byte v)
@@ -92,12 +93,19 @@ void Semaforo::allOff()
   verde.off();
 }
 
+byte Semaforo::getSemaforos()
+{
+  return num_semaforos;
+}
+
 
 
 //* ===========================================================================
 //* TESTS
 //* ===========================================================================
 
+
+//· TestConexiones ----------------------------------------------------------->
 
 class TestConexiones
 {
