@@ -67,13 +67,12 @@ void LuzSemaforo::off()
 
 class Semaforo {
   private:
-    static byte num_semaforos;  // Cuenta de la cantidad de semaforos
+    // ...
   public:
     LuzSemaforo rojo, ambar, verde;
     void begin(byte r, byte a, byte v);
     void allOn();
     void allOff();
-    byte getSemaforos();
 };
 
 void Semaforo::begin(byte r, byte a, byte v)
@@ -95,11 +94,6 @@ void Semaforo::allOff()
   rojo.off();
   ambar.off();
   verde.off();
-}
-
-byte Semaforo::getSemaforos()
-{
-  return num_semaforos;
 }
 
 
