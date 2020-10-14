@@ -137,21 +137,14 @@ void TestConexiones::begin(byte r1, byte a1, byte v1,
 
 void TestConexiones::testAll()
 {
-  sem1.allOn();
-  t.Stop(1);
-  sem1.allOff();
+  for (int i = 0; i <= 4; i++)
+  {
+    Semaforo semaforo[4] = {sem1, sem2, sem3, sem4};
 
-  sem2.allOn();
-  t.Stop(1);
-  sem2.allOff();
-
-  sem3.allOn();
-  t.Stop(1);
-  sem3.allOff();
-
-  sem4.allOn();
-  t.Stop(1);
-  sem4.allOff();
+    semaforo[i].allOn();
+    t.Stop(1);
+    semaforo[i].allOff();
+  }
 }
 
 
