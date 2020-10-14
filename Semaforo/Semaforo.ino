@@ -194,12 +194,12 @@ void TestEstados::testR()
 //* ===========================================================================
 
 
-TestConexiones prueba;
+TestConexiones conex;
 
 void setup()
 {
-  prueba.begin(14, 15, 16, 17, 18, 19, 12, 11, 10, 9, 8, 7);
-  prueba.testAll();
+  conex.begin(14, 15, 16, 17, 18, 19, 12, 11, 10, 9, 8, 7);
+  conex.testAll();
 }
 
 void loop()
