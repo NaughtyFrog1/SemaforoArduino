@@ -37,7 +37,8 @@ void Timer::Stop(float time)
 
 //· LuzSemaforo -------------------------------------------------------------->
 
-class LuzSemaforo {
+class LuzSemaforo
+{
   private:
     byte pin;
   public:
@@ -65,7 +66,8 @@ void LuzSemaforo::off()
 
 //· Semaforo ----------------------------------------------------------------->
 
-class Semaforo {
+class Semaforo
+{
   private:
     // ...
   public:
@@ -247,6 +249,7 @@ void setup()
   est.testA();
   tm.Stop(1);
   est.endTest();
+
 
   //· Programa --------------------------------------------------------------->
   
