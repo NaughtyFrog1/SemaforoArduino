@@ -226,6 +226,7 @@ Timer tm;
 
 void setup()
 {
+  //· Tests ------------------------------------------------------------------>
   TestConexiones conex;
   TestEstados est;
 
@@ -242,6 +243,9 @@ void setup()
   est.testA();
   tm.Stop(1);
   est.endTest();
+
+  //· Programa --------------------------------------------------------------->
+
 }
 
 void loop()
