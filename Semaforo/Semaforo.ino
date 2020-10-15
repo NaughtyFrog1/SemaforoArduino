@@ -69,9 +69,8 @@ void LuzSemaforo::off()
 class Semaforo
 {
   private:
-    // ...
-  public:
     LuzSemaforo rojo, ambar, verde;
+  public:
     void begin(byte r, byte a, byte v);
     void allOn();
     void allOff();
@@ -270,7 +269,7 @@ void loop()
   tm.Stop(3);
   esquina[(cont + 0) % 4].setA();
   esquina[(cont + 1) % 4].setRA();
-  tm.Stop(1);
+  tm.Stop(3);
 
   cont++;
   if (cont == 3) cont = 0;  // Reset para evitar overflow
