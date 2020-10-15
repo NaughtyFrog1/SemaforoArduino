@@ -12,11 +12,11 @@
 class Timer
 {
 private:
-  int base_time;
+  float base_time;
 public:
   Timer();
-  void SetBaseTime(int mult);
-  void Stop(int x);
+  void SetBaseTime(float mult);
+  void Stop(float x);
 };
 
 Timer::Timer()
@@ -24,12 +24,12 @@ Timer::Timer()
   base_time = 1000;  // milisegundos a segundos
 }
 
-void Timer::SetBaseTime(int mult)
+void Timer::SetBaseTime(float mult)
 {
   base_time = mult * 1000;
 }
 
-void Timer::Stop(int time)
+void Timer::Stop(float time)
 {
   delay(time * base_time);
 }
@@ -100,6 +100,31 @@ void Semaforo::allOff()
   verde.off();
 }
 
+void Semaforo::setR()
+{
+  allOff();
+  rojo.on();
+}
+
+void Semaforo::setA()
+{
+  allOff();
+  ambar.on();
+}
+
+void Semaforo::setV()
+{
+  allOff();
+  verde.on();
+}
+
+void Semaforo::setRA()
+{
+  allOff();
+  rojo.on();
+  ambar.on();
+}
+
 
 
 //* ===========================================================================
@@ -140,7 +165,7 @@ void TestConexiones::testAll()
     Semaforo semaforo[4] = {sem1, sem2, sem3, sem4};
 
     semaforo[i].allOn();
-    t.Stop(1);
+    t.Stop(0.5);
     semaforo[i].allOff();
   }
 }
@@ -189,31 +214,6 @@ void TestEstados::testV()
 void TestEstados::testRA()
 {
   sem1.setRA();
-}
-
-void Semaforo::setR()
-{
-  allOff();
-  rojo.on();
-}
-
-void Semaforo::setA()
-{
-  allOff();
-  ambar.on();
-}
-
-void Semaforo::setV()
-{
-  allOff();
-  verde.on();
-}
-
-void Semaforo::setRA()
-{
-  allOff();
-  rojo.on();
-  ambar.on();
 }
 
 
