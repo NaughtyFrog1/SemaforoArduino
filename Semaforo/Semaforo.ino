@@ -154,6 +154,7 @@ class TestEstados
     Semaforo sem1;
   public:
     void begin(byte r, byte a, byte v);
+    void endTest();
     void testR();
     void testA();
     void testV();
@@ -163,6 +164,11 @@ class TestEstados
 void TestEstados::begin(byte r, byte a, byte v)
 {
   sem1.begin(r, a, v);
+}
+
+void TestEstados::endTest()
+{
+  sem1.allOff();
 }
 
 void TestEstados::testR()
@@ -217,19 +223,16 @@ void Semaforo::setRA()
 //* ===========================================================================
 
 Timer tm;
-TestConexiones conex;
-TestEstados est;
 
 void setup()
 {
+  TestConexiones conex;
+  TestEstados est;
+
   conex.begin(14, 15, 16, 17, 18, 19, 12, 11, 10, 9, 8, 7);
   conex.testAll();
 
   est.begin(14, 15, 16);
-}
-
-void loop()
-{
   est.testR();
   tm.Stop(1);
   est.testRA();
@@ -238,4 +241,9 @@ void loop()
   tm.Stop(1);
   est.testA();
   tm.Stop(1);
+  est.endTest();
+}
+
+void loop()
+{
 }
