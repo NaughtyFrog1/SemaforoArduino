@@ -273,5 +273,5 @@ void loop()
   tm.Stop(1);
 
   cont++;
-  if (cont == 4) cont = 0;  // Reset para evitar overflow
+  if (cont == 3) cont = 0;  // Reset para evitar overflow
 }
