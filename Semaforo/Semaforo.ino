@@ -226,6 +226,7 @@ void TestEstados::testRA()
 Timer tm;
 
 Semaforo sem1, sem2, sem3, sem4;
+byte cont;
 
 
 void setup()
@@ -260,5 +261,27 @@ void loop()
 {
   Semaforo esquina[4] = {sem1, sem2, sem3, sem4};
 
-  esquina[1].allOn();
+  esquina[(cont + 0) % 4].setV();
+  esquina[(cont + 1) % 4].setR();
+  esquina[(cont + 2) % 4].setR();
+  esquina[(cont + 3) % 4].setR();
+  tm.Stop(1);
+  esquina[(cont + 0) % 4].setA();
+  esquina[(cont + 1) % 4].setR();
+  esquina[(cont + 2) % 4].setR();
+  esquina[(cont + 3) % 4].setR();
+  tm.Stop(1);
+  esquina[(cont + 0) % 4].setR();
+  esquina[(cont + 1) % 4].setR();
+  esquina[(cont + 2) % 4].setR();
+  esquina[(cont + 3) % 4].setR();
+  tm.Stop(1);
+  esquina[(cont + 0) % 4].setR();
+  esquina[(cont + 1) % 4].setRA();
+  esquina[(cont + 2) % 4].setR();
+  esquina[(cont + 3) % 4].setR();
+  tm.Stop(1);
+
+  cont++;
+  if (cont == 4) cont = 0;  // Reset para evitar overflow
 }
