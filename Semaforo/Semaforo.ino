@@ -1,5 +1,4 @@
 #include <Arduino.h>
-// #include <iostream>
 
 
 
@@ -265,21 +264,9 @@ void loop()
   esquina[(cont + 1) % 4].setR();
   esquina[(cont + 2) % 4].setR();
   esquina[(cont + 3) % 4].setR();
-  tm.Stop(1);
+  tm.Stop(3);
   esquina[(cont + 0) % 4].setA();
-  esquina[(cont + 1) % 4].setR();
-  esquina[(cont + 2) % 4].setR();
-  esquina[(cont + 3) % 4].setR();
-  tm.Stop(1);
-  esquina[(cont + 0) % 4].setR();
-  esquina[(cont + 1) % 4].setR();
-  esquina[(cont + 2) % 4].setR();
-  esquina[(cont + 3) % 4].setR();
-  tm.Stop(1);
-  esquina[(cont + 0) % 4].setR();
   esquina[(cont + 1) % 4].setRA();
-  esquina[(cont + 2) % 4].setR();
-  esquina[(cont + 3) % 4].setR();
   tm.Stop(1);
 
   cont++;
