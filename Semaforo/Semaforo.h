@@ -10,13 +10,19 @@ private:
   float base_time;
 public:
   Timer();
+  Timer(int x);
   void SetBaseTime(float mult);
   void Stop(float x);
 };
 
 Timer::Timer()
 {
-  base_time = 1000;  // milisegundos a segundos
+  base_time = 100;
+}
+
+Timer::Timer(int x)
+{
+  base_time = x;
 }
 
 void Timer::SetBaseTime(float mult)

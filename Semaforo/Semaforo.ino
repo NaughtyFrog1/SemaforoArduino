@@ -3,7 +3,7 @@
 #include "Tests.h"
 
 
-Timer tm;
+Timer tm(1000);
 
 Semaforo sem1, sem2, sem3, sem4;
 byte cont;
