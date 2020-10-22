@@ -6,13 +6,13 @@
 
 class Timer
 {
-private:
-  float base_time;
-public:
-  Timer();
-  Timer(int x);
-  void SetBaseTime(float mult);
-  void Stop(float x);
+  private:
+    float base_time;
+  public:
+    Timer();
+    Timer(int x);
+    void SetBaseTime(float mult);
+    void Stop(float x);
 };
 
 Timer::Timer()
