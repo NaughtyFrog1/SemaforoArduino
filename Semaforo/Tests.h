@@ -32,10 +32,9 @@ void TestConexiones::begin(byte r1, byte a1, byte v1,
 
 void TestConexiones::testAll()
 {
+  Semaforo semaforo[4] = {s1, s2, s3, s4};
   for (int i = 0; i < 4; i++)
   {
-    Semaforo semaforo[4] = {s1, s2, s3, s4};
-
     semaforo[i].allOn();
     t.Stop(0.5);
     semaforo[i].allOff();
