@@ -20,15 +20,7 @@ void setup()
   conex.testAll();
 
   est.begin(14, 15, 16);
-  est.testR();
-  tm.Stop(1);
-  est.testRA();
-  tm.Stop(1);
-  est.testV();
-  tm.Stop(1);
-  est.testA();
-  tm.Stop(1);
-  est.endTest();
+  est.testSecuencia();
 
 
   //· Programa --------------------------------------------------------------->

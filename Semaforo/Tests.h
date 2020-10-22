@@ -9,7 +9,6 @@
 class TestConexiones
 {
   private:
-    Timer t;
     Semaforo s1, s2, s3, s4;
   public:
     void begin(byte r1, byte a1, byte v1, 
@@ -36,7 +35,7 @@ void TestConexiones::testAll()
   for (int i = 0; i < 4; i++)
   {
     semaforo[i].allOn();
-    t.Stop(0.5);
+    delay(500);
     semaforo[i].allOff();
   }
 }
@@ -56,6 +55,7 @@ class TestEstados
     void testA();
     void testV();
     void testRA();
+    void testSecuencia();
 };
 
 void TestEstados::begin(byte r, byte a, byte v)
@@ -100,5 +100,17 @@ void TestEstados::testRA()
   printStatuses();
 }
 
+void TestEstados::testSecuencia()
+{
+  testR(); 
+  delay(1000);
+  testRA();
+  delay(1000);
+  testV();
+  delay(1000);
+  testA();
+  delay(1000);
+  endTest();
+}
 
 #endif
