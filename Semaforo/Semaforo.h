@@ -2,40 +2,6 @@
 #define Semaforo_h
 
 
-//· Timer -------------------------------------------------------------------->
-
-class Timer
-{
-  private:
-    float base_time;
-  public:
-    Timer();
-    Timer(int x);
-    void SetBaseTime(float mult);
-    void Stop(float x);
-};
-
-Timer::Timer()
-{
-  base_time = 100;
-}
-
-Timer::Timer(int x)
-{
-  base_time = x;
-}
-
-void Timer::SetBaseTime(float mult)
-{
-  base_time = mult * 1000;
-}
-
-void Timer::Stop(float time)
-{
-  delay(time * base_time);
-}
-
-
 //· LuzSemaforo -------------------------------------------------------------->
 
 class LuzSemaforo

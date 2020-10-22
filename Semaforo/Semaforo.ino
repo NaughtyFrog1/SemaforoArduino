@@ -3,8 +3,6 @@
 #include "Tests.h"
 
 
-Timer tm(1000);
-
 Semaforo sem1, sem2, sem3, sem4;
 byte cont;
 
@@ -39,10 +37,10 @@ void loop()
   esquina[(cont + 1) % 4].setR();
   esquina[(cont + 2) % 4].setR();
   esquina[(cont + 3) % 4].setR();
-  tm.Stop(3);
+  delay(3000);
   esquina[(cont + 0) % 4].setA();
   esquina[(cont + 1) % 4].setRA();
-  tm.Stop(3);
+  delay(3000);
 
   cont++;
   if (cont == 3) cont = 0;  // Reset para evitar overflow
