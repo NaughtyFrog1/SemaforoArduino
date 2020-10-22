@@ -9,15 +9,20 @@ byte cont;
 
 void setup()
 {
-  //· Tests ------------------------------------------------------------------>
-  TestConexiones conex;
-  TestEstados est;
-
   Serial.begin(9600);
-  conex.begin(14, 15, 16, 17, 18, 19, 12, 11, 10, 9, 8, 7);
-  conex.testAll();
 
-  est.begin(14, 15, 16);
+
+  //· Tests ------------------------------------------------------------------>
+  
+  TestConexiones conex(
+    14, 15, 16,
+    17, 18, 19,
+    12, 11, 10,
+     9,  8,  7
+  );
+  TestEstados est(14, 15, 16);
+
+  conex.testAll();
   est.testSecuencia();
 
 
