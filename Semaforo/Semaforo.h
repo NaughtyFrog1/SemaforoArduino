@@ -107,9 +107,7 @@ void Semaforo::setRA()
 }
 
 bool Semaforo::getStR() {return rojo.getSt();}
-
 bool Semaforo::getStA() {return ambar.getSt();}
-
 bool Semaforo::getStV() {return verde.getSt();}
 
 #endif
