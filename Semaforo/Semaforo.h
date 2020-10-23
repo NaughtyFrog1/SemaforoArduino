@@ -138,16 +138,16 @@ class Esquina
    byte step;
    unit_t last_step;
   public:
-    Esquina();
+    Esquina(byte, byte, byte, unit_t, unit_t,
+            byte, byte, byte, unit_t, unit_t);
     void Secuencia();
 };
 
-
-//! BORRAR: Solo para test rápidos
-Esquina::Esquina()
-{
-  sem1.begin(14, 15, 16, 6000, 2000);
-  sem2.begin(17, 18, 19, 4000, 2000);
+Esquina::Esquina(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
+                 byte r2, byte a2, byte v2, unit_t tv2, unit_t ta2
+){
+  sem1.begin(r1, a1, v1, tv1, ta1);
+  sem2.begin(r2, a2, v2, tv2, tv2);
   step = 0;
   last_step = 0;
 }
