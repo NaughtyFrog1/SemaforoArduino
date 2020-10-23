@@ -3,6 +3,7 @@
 
 typedef unsigned long unit_t; 
 
+
 //· LuzSemaforo -------------------------------------------------------------->
 
 class LuzSemaforo
