@@ -4,8 +4,6 @@
 #include "Semaforo.h"
 
 
-//· TestConexiones ----------------------------------------------------------->
-
 class TestConexiones
 {
   private:
@@ -43,77 +41,5 @@ void TestConexiones::testAll()
   }
 }
 
-
-//· TestEstados -------------------------------------------------------------->
-
-class TestEstados
-{
-  private:
-    Semaforo sem1;
-    void printStatuses();
-  public:
-    TestEstados(byte r, byte a, byte v);
-    void endTest();
-    void testR();
-    void testA();
-    void testV();
-    void testRA();
-    void testSecuencia();
-};
-
-TestEstados::TestEstados(byte r, byte a, byte v)
-{
-  sem1.begin(r, a, v, 0, 0);
-}
-
-void TestEstados::printStatuses()
-{
-  Serial.println();
-  Serial.print("R = "); Serial.println(sem1.getStR());
-  Serial.print("A = "); Serial.println(sem1.getStA());
-  Serial.print("V = "); Serial.println(sem1.getStV());
-}
-
-void TestEstados::endTest()
-{
-  sem1.allOff();
-}
-
-void TestEstados::testR()
-{
-  sem1.setR();
-  printStatuses();
-}
-
-void TestEstados::testA()
-{
-  sem1.setA();
-  printStatuses();
-}
-
-void TestEstados::testV()
-{
-  sem1.setV();
-  printStatuses();
-}
-
-void TestEstados::testRA()
-{
-  sem1.setRA();
-  printStatuses();
-}
-
-void TestEstados::testSecuencia()
-{
-  testR(); 
-  delay(1000);
-  testRA();
-  delay(1000);
-  testV();
-  delay(1000);
-  testA();
-  delay(1000);
-  endTest();
-}
 
 #endif
