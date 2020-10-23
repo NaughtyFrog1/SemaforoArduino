@@ -33,15 +33,9 @@ void LuzSemaforo::begin(byte pin_luz, unit_t t)
   pinMode(pin, OUTPUT);
 }
 
-void LuzSemaforo::on()
-{
-  digitalWrite(pin, HIGH);
-}
+void LuzSemaforo::on() {digitalWrite(pin, HIGH);}
 
-void LuzSemaforo::off()
-{
-  digitalWrite(pin, LOW);
-}
+void LuzSemaforo::off() {digitalWrite(pin, LOW);}
 
 unit_t LuzSemaforo::getTimeOn() {return time_on;}
 
