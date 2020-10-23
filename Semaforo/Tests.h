@@ -26,10 +26,10 @@ TestConexiones::TestConexiones(
   byte r3, byte a3, byte v3,
   byte r4, byte a4, byte v4)
 {
-  s1.begin(r1, a1, v1);
-  s2.begin(r2, a2, v2);
-  s3.begin(r3, a3, v3);
-  s4.begin(r4, a4, v4);
+  s1.begin(r1, a1, v1, 0, 0);
+  s2.begin(r2, a2, v2, 0, 0);
+  s3.begin(r3, a3, v3, 0, 0);
+  s4.begin(r4, a4, v4, 0, 0);
 }
 
 void TestConexiones::testAll()
@@ -63,7 +63,7 @@ class TestEstados
 
 TestEstados::TestEstados(byte r, byte a, byte v)
 {
-  sem1.begin(r, a, v);
+  sem1.begin(r, a, v, 0, 0);
 }
 
 void TestEstados::printStatuses()
