@@ -59,7 +59,6 @@ class Semaforo
 {
   private:
     LuzSemaforo rojo, ambar, verde;
-    unit_t last_change;
   public:
     void begin(byte r, byte a, byte v, unit_t tv, unit_t ta);
     void allOn();
@@ -73,8 +72,6 @@ class Semaforo
     bool getStV();
     unit_t getTimeOnV();
     unit_t getTimeOnA();
-    unit_t getLastChange();
-
 };
 
 void Semaforo::begin(byte r, byte a, byte v, unit_t tv, unit_t ta)
@@ -102,21 +99,18 @@ void Semaforo::setR()
 {
   allOff();
   rojo.on();
-  last_change = millis();
 }
 
 void Semaforo::setA()
 {
   allOff();
   ambar.on();
-  last_change = millis();
 }
 
 void Semaforo::setV()
 {
   allOff();
   verde.on();
-  last_change = millis();
 }
 
 void Semaforo::setRA()
@@ -124,17 +118,78 @@ void Semaforo::setRA()
   allOff();
   rojo.on();
   ambar.on();
-  last_change = millis();
 }
 
-bool Semaforo::getStR() {return rojo.getSt();}
+bool Semaforo::getStR() {return  rojo.getSt();}
 bool Semaforo::getStA() {return ambar.getSt();}
 bool Semaforo::getStV() {return verde.getSt();}
 
 unit_t Semaforo::getTimeOnA() {return ambar.getTimeOn();}
 unit_t Semaforo::getTimeOnV() {return verde.getTimeOn();}
 
-unit_t Semaforo::getLastChange() {return last_change;}
+
+//· Esquina ------------------------------------------------------------------>
+
+class Esquina
+{
+  private:
+   Semaforo sem1, sem2;
+   byte step;
+   unit_t last_step;
+  public:
+    Esquina();
+    void Secuencia();
+};
+
+
+//! BORRAR: Solo para test rápidos
+Esquina::Esquina()
+{
+  sem1.begin(14, 15, 16, 6000, 2000);
+  sem2.begin(17, 18, 19, 4000, 2000);
+  step = 0;
+  last_step = 0;
+}
+
+void Esquina::Secuencia()
+{
+  
+  if ((step == 0) && 
+      (millis() > (last_step + sem1.getTimeOnV()))
+  ){
+    sem1.setV();
+    sem2.setR();
+    step++;
+    last_step = millis();
+  }
+
+  else if ((step == 1) && 
+           (millis() > (last_step + sem1.getTimeOnA()))
+  ){
+    sem1.setA();
+    sem2.setRA();
+    step++;
+    last_step = millis();
+  }
+
+  else if ((step == 2) && 
+      (millis() > (last_step + sem2.getTimeOnV()))
+  ){
+    sem2.setV();
+    sem1.setR();
+    step++;
+    last_step = millis();
+  }
+
+  else if ((step == 3) && 
+           (millis() > (last_step + sem2.getTimeOnA()))
+  ){
+    sem2.setA();
+    sem1.setRA();
+    step = 0;
+    last_step = millis();
+  }
+}
 
 
 #endif
