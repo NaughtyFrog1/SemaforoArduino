@@ -133,37 +133,32 @@ Esquina::Esquina(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
 
 void Esquina::Secuencia()
 {
-  
-  if ((step == 0) && 
-      (millis() > (last_step + sem1.getTimeOnV()))
-  ){
+  if ((step == 0) && (millis() > (last_step + sem1.getTimeOnA())))
+  {
     sem1.setV();
     sem2.setR();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 1) && 
-           (millis() > (last_step + sem1.getTimeOnA()))
-  ){
+  else if ((step == 1) && (millis() > (last_step + sem1.getTimeOnV())))
+  {
     sem1.setA();
     sem2.setRA();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 2) && 
-      (millis() > (last_step + sem2.getTimeOnV()))
-  ){
+  else if ((step == 2) && (millis() > (last_step + sem2.getTimeOnA())))
+  {
     sem2.setV();
     sem1.setR();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 3) && 
-           (millis() > (last_step + sem2.getTimeOnA()))
-  ){
+  else if ((step == 3) && (millis() > (last_step + sem2.getTimeOnV())))
+  {
     sem2.setA();
     sem1.setRA();
     step = 0;
@@ -171,5 +166,16 @@ void Esquina::Secuencia()
   }
 }
 
+/*
+  TODO:
+    Para solucionar el problema de los tiempos de las luces de los semáforos,
+    tenemos que replantearnos la forma en la que contolamos la secuencia.
+
+    Los ifs no tienen que cambiar con el tiempo de su luz, sino que con el 
+    tiempo de la luz siguiente a la suya, puesto que estamos controlando cuando cambian, no cunado se encienden.
+    
+    Entonces si nosotros cambiamos a la luz verde, por ejemplo, le decimos a
+    la luz ambar que espere el tiempo de la luz verde para encenderse
+*/
 
 #endif

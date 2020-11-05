@@ -23,6 +23,6 @@ void setup()
 
 void loop()
 {
-  esq1.Secuencia(); 
+  esq1.Secuencia();
   esq2.Secuencia();
 }
