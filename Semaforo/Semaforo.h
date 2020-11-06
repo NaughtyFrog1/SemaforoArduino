@@ -126,14 +126,14 @@ Esquina::Esquina(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
                  byte r2, byte a2, byte v2, unit_t tv2, unit_t ta2
 ){
   sem1.begin(r1, a1, v1, tv1, ta1);
-  sem2.begin(r2, a2, v2, tv2, tv2);
+  sem2.begin(r2, a2, v2, tv2, ta2);
   step = 0;
   last_step = 0;
 }
 
 void Esquina::Secuencia()
 {
-  if ((step == 0) && (millis() > (last_step + sem1.getTimeOnA())))
+  if ((step == 0) && (millis() > (last_step + sem2.getTimeOnA())))
   {
     sem1.setV();
     sem2.setR();
@@ -149,7 +149,7 @@ void Esquina::Secuencia()
     last_step = millis();
   }
 
-  else if ((step == 2) && (millis() > (last_step + sem2.getTimeOnA())))
+  else if ((step == 2) && (millis() > (last_step + sem1.getTimeOnA())))
   {
     sem2.setV();
     sem1.setR();
