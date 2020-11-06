@@ -166,16 +166,5 @@ void Esquina::Secuencia()
   }
 }
 
-/*
-  TODO:
-    Para solucionar el problema de los tiempos de las luces de los semáforos,
-    tenemos que replantearnos la forma en la que contolamos la secuencia.
-
-    Los ifs no tienen que cambiar con el tiempo de su luz, sino que con el 
-    tiempo de la luz siguiente a la suya, puesto que estamos controlando cuando cambian, no cunado se encienden.
-    
-    Entonces si nosotros cambiamos a la luz verde, por ejemplo, le decimos a
-    la luz ambar que espere el tiempo de la luz verde para encenderse
-*/
 
 #endif
