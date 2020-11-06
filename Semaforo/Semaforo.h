@@ -4,7 +4,7 @@
 typedef unsigned long unit_t; 
 
 
-//· LuzSemaforo -------------------------------------------------------------->
+//* LuzSemaforo -------------------------------------------------------------->
 
 class LuzSemaforo
 {
@@ -40,7 +40,7 @@ void LuzSemaforo::off() {digitalWrite(pin, LOW);}
 unit_t LuzSemaforo::getTimeOn() {return time_on;}
 
 
-//· Semaforo ----------------------------------------------------------------->
+//* Semaforo ----------------------------------------------------------------->
 
 class Semaforo
 {
@@ -108,7 +108,7 @@ unit_t Semaforo::getTimeOnA() {return ambar.getTimeOn();}
 unit_t Semaforo::getTimeOnV() {return verde.getTimeOn();}
 
 
-//· Esquina ------------------------------------------------------------------>
+//* Esquina para dos semaforos ----------------------------------------------->
 
 class Esquina
 {
@@ -119,7 +119,7 @@ class Esquina
   public:
     Esquina(byte, byte, byte, unit_t, unit_t,
             byte, byte, byte, unit_t, unit_t);
-    void Secuencia();
+    void secuencia();
 };
 
 Esquina::Esquina(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
@@ -131,7 +131,7 @@ Esquina::Esquina(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
   last_step = 0;
 }
 
-void Esquina::Secuencia()
+void Esquina::secuencia()
 {
   if ((step == 0) && (millis() > (last_step + sem2.getTimeOnA())))
   {
@@ -166,5 +166,111 @@ void Esquina::Secuencia()
   }
 }
 
+
+//* Esquina para semáforo con cuatro luces ----------------------------------->
+
+class EsquinaCuatro
+{
+  private:
+   Semaforo sem1, sem2, sem3, sem4;
+   byte step;
+   unit_t last_step;
+  public:
+    EsquinaCuatro(byte, byte, byte, unit_t, unit_t,
+                  byte, byte, byte, unit_t, unit_t,
+                  byte, byte, byte, unit_t, unit_t,
+                  byte, byte, byte, unit_t, unit_t);
+    void secuencia();
+    void todasRojo();
+};
+
+EsquinaCuatro::EsquinaCuatro (
+  byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
+  byte r2, byte a2, byte v2, unit_t tv2, unit_t ta2,
+  byte r3, byte a3, byte v3, unit_t tv3, unit_t ta3,
+  byte r4, byte a4, byte v4, unit_t tv4, unit_t ta4
+){
+  sem1.begin(r1, a1, v1, tv1, ta1);
+  sem2.begin(r2, a2, v2, tv2, ta2);
+  sem3.begin(r3, a3, v3, tv3, ta3);
+  sem4.begin(r4, a4, v4, tv4, ta4);
+  step = 0;
+  last_step = 0;
+}
+
+void EsquinaCuatro::secuencia()
+{
+  if ((step == 0) && (millis() > (last_step + sem4.getTimeOnA())))
+  {
+    sem1.setV();
+    sem4.setR();
+    step++;
+    last_step = millis();
+  }
+
+  else if ((step == 1) && (millis() > (last_step + sem1.getTimeOnV())))
+  {
+    sem1.setA();
+    sem2.setRA();
+    step++;
+    last_step = millis();
+  }
+
+  else if ((step == 2) && (millis() > (last_step + sem1.getTimeOnA())))
+  {
+    sem1.setR();
+    sem2.setV();
+    step++;
+    last_step = millis();
+  }
+
+  else if ((step == 3) && (millis() > (last_step + sem2.getTimeOnV())))
+  {
+    sem2.setA();
+    sem3.setRA();
+    step++;
+    last_step = millis();
+  }
+
+  else if ((step == 4) && (millis() > (last_step + sem2.getTimeOnA())))
+  {
+    sem2.setR();
+    sem3.setV();
+    step++;
+    last_step = millis();
+  }
+  
+  else if ((step == 5) && (millis() > (last_step + sem3.getTimeOnV())))
+  {
+    sem3.setA();
+    sem4.setRA();
+    step++;
+    last_step = millis();
+  }
+
+  else if ((step == 6) && (millis() > (last_step + sem3.getTimeOnA())))
+  {
+    sem3.setR();
+    sem4.setV();
+    step++;
+    last_step = millis();
+  }
+
+  else if ((step == 7) && (millis() > (last_step + sem4.getTimeOnV())))
+  {
+    sem1.setRA();
+    sem4.setA();
+    step = 0;
+    last_step = millis();
+  }
+}
+
+void EsquinaCuatro::todasRojo()
+{
+  sem1.setR();
+  sem2.setR();
+  sem3.setR();
+  sem4.setR();
+}
 
 #endif
