@@ -112,18 +112,27 @@ unit_t Semaforo::getTimeOnV() {return verde.getTimeOn();}
 
 class Esquina
 {
+  protected:
+    byte step;
+    unit_t last_step;
+  
+  public:
+    virtual void secuencia() = 0;
+};
+
+
+class EsquinaDos : public Esquina
+{
   private:
    Semaforo sem1, sem2;
-   byte step;
-   unit_t last_step;
   public:
-    Esquina(byte, byte, byte, unit_t, unit_t,
-            byte, byte, byte, unit_t, unit_t);
+    EsquinaDos(byte, byte, byte, unit_t, unit_t,
+               byte, byte, byte, unit_t, unit_t);
     void secuencia();
 };
 
-Esquina::Esquina(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
-                 byte r2, byte a2, byte v2, unit_t tv2, unit_t ta2
+EsquinaDos::EsquinaDos(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
+                       byte r2, byte a2, byte v2, unit_t tv2, unit_t ta2
 ){
   sem1.begin(r1, a1, v1, tv1, ta1);
   sem2.begin(r2, a2, v2, tv2, ta2);
@@ -131,7 +140,7 @@ Esquina::Esquina(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
   last_step = 0;
 }
 
-void Esquina::secuencia()
+void EsquinaDos::secuencia()
 {
   if ((step == 0) && (millis() > (last_step + sem2.getTimeOnA())))
   {
@@ -169,12 +178,10 @@ void Esquina::secuencia()
 
 //* Esquina para semáforo con cuatro luces ----------------------------------->
 
-class EsquinaCuatro
+class EsquinaCuatro : public Esquina
 {
   private:
    Semaforo sem1, sem2, sem3, sem4;
-   byte step;
-   unit_t last_step;
   public:
     EsquinaCuatro(byte, byte, byte, unit_t, unit_t,
                   byte, byte, byte, unit_t, unit_t,

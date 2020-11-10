@@ -3,16 +3,16 @@
 #include "Tests.h"
 
 
-/* Esquina
-Esquina esq1(14, 15, 16, 5000, 1000,   // Semaforo 1.1
-             17, 18, 19, 5000, 1000);  // Semáforo 1.2
+//* Esquina
+EsquinaDos esq1(14, 15, 16, 5000, 1000,   // Semaforo 1.1
+                17, 18, 19, 5000, 1000);  // Semáforo 1.2
 
-Esquina esq2(12, 11, 10, 2000, 1000,   // Semaforo 2.1
-              9,  8,  7, 2000, 1000);  // Semaforo 2.2
+EsquinaDos esq2(12, 11, 10, 2000, 1000,   // Semaforo 2.1
+                 9,  8,  7, 2000, 1000);  // Semaforo 2.2
 /**/
 
 
-///* EsquinaCuatro
+/* EsquinaCuatro
 EsquinaCuatro esq1(14, 15, 16, 3000, 1000,   // Semaforo 1
                    17, 18, 19, 3000, 1000,   // Semáforo 2
                    12, 11, 10, 3000, 1000,   // Semáforo 3
@@ -29,11 +29,11 @@ void setup()
   );
 
   conex.testAll();
-  esq1.todasRojo();
+  // esq1.todasRojo();
 }
 
 void loop()
 {
   esq1.secuencia();
-  // esq2.secuencia();  // Esquina
+  esq2.secuencia();  // Esquina
 }
