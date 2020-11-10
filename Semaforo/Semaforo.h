@@ -29,8 +29,7 @@ class LuzSemaforo : public Luz
   private:
     unit_t time_on;
   public:
-    void begin(byte pin_luz);  // Útil para inicializar una luz roja
-    void begin(byte pin_luz, unit_t t);
+    void begin(byte p, unit_t t);
     unit_t getTimeOn();
 };
 
@@ -40,7 +39,8 @@ class LuzSemaforo : public Luz
 class Semaforo
 {
   private:
-    LuzSemaforo rojo, ambar, verde;
+    LuzSemaforo ambar, verde;
+    Luz rojo;
   public:
     Semaforo();
     Semaforo(byte r, byte a, byte v, unit_t tv, unit_t ta);
@@ -63,7 +63,6 @@ class Esquina
   protected:
     byte step;
     unit_t last_step;
-  
   public:
     virtual void secuencia() = 0;
 };
@@ -102,6 +101,13 @@ class EsquinaCuatro : public Esquina
 
 //· Luz
 
+void Luz::begin(byte p)
+{
+  pin = p;
+  estado = false;
+  pinMode(pin, OUTPUT);
+}
+
 void Luz::on() {digitalWrite(pin, HIGH);}
 
 void Luz::off() {digitalWrite(pin, LOW);}
@@ -111,17 +117,9 @@ boolean Luz::getEstado() {return estado;}
 
 //· LuzSemaforo
 
-void LuzSemaforo::begin(byte pin_luz)
+void LuzSemaforo::begin(byte p, unit_t t)
 {
-  pin = pin_luz;
-  time_on = 0;
-  estado = false;
-  pinMode(pin, OUTPUT);
-}
-
-void LuzSemaforo::begin(byte pin_luz, unit_t t)
-{
-  pin = pin_luz;
+  pin = p;
   time_on = t;
   estado = false;
   pinMode(pin, OUTPUT);
@@ -191,7 +189,6 @@ unit_t Semaforo::getTimeOnV() {return verde.getTimeOn();}
 
 
 //* Esquina ------------------------------------------------------------------>
-
 
 //· EsquinaDos
 
