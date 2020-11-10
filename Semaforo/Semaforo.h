@@ -11,20 +11,21 @@ class LuzSemaforo
   private:
     byte pin;
     unit_t time_on;
-    boolean estado
+    bool estado;
   public:
     void begin(byte pin_luz);  // Útil para inicializar una luz roja
     void begin(byte pin_luz, unit_t t);
     void on();
     void off();
     unit_t getTimeOn();
-    get estado
+    bool getEstado();
 };
 
 void LuzSemaforo::begin(byte pin_luz)
 {
   pin = pin_luz;
   time_on = 0;
+  estado = false;
   pinMode(pin, OUTPUT);
 }
 
@@ -32,15 +33,23 @@ void LuzSemaforo::begin(byte pin_luz, unit_t t)
 {
   pin = pin_luz;
   time_on = t;
+  estado = false;
   pinMode(pin, OUTPUT);
 }
 
-void LuzSemaforo::on() {digitalWrite(pin, HIGH);}
+void LuzSemaforo::on() {
+  digitalWrite(pin, HIGH);
+  estado = true;
+}
 
-void LuzSemaforo::off() {digitalWrite(pin, LOW);}
+void LuzSemaforo::off() {
+  digitalWrite(pin, LOW);
+  estado = true;
+}
 
 unit_t LuzSemaforo::getTimeOn() {return time_on;}
 
+bool LuzSemaforo::getEstado() {return estado;}
 
 //* Semaforo ----------------------------------------------------------------->
 
