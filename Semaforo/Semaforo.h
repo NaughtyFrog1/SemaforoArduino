@@ -11,12 +11,14 @@ class LuzSemaforo
   private:
     byte pin;
     unit_t time_on;
+    boolean estado
   public:
     void begin(byte pin_luz);  // Útil para inicializar una luz roja
     void begin(byte pin_luz, unit_t t);
     void on();
     void off();
     unit_t getTimeOn();
+    get estado
 };
 
 void LuzSemaforo::begin(byte pin_luz)
