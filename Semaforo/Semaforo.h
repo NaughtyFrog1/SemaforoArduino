@@ -11,14 +11,14 @@ class LuzSemaforo
   private:
     byte pin;
     unit_t time_on;
-    bool estado;
+    boolean estado;
   public:
     void begin(byte pin_luz);  // Útil para inicializar una luz roja
     void begin(byte pin_luz, unit_t t);
     void on();
     void off();
     unit_t getTimeOn();
-    bool getEstado();
+    boolean getEstado();
 };
 
 void LuzSemaforo::begin(byte pin_luz)
@@ -37,19 +37,21 @@ void LuzSemaforo::begin(byte pin_luz, unit_t t)
   pinMode(pin, OUTPUT);
 }
 
-void LuzSemaforo::on() {
+void LuzSemaforo::on()
+{
   digitalWrite(pin, HIGH);
   estado = true;
 }
 
-void LuzSemaforo::off() {
+void LuzSemaforo::off()
+{
   digitalWrite(pin, LOW);
   estado = true;
 }
 
 unit_t LuzSemaforo::getTimeOn() {return time_on;}
 
-bool LuzSemaforo::getEstado() {return estado;}
+boolean LuzSemaforo::getEstado() {return estado;}
 
 //* Semaforo ----------------------------------------------------------------->
 
@@ -58,6 +60,8 @@ class Semaforo
   private:
     LuzSemaforo rojo, ambar, verde;
   public:
+    Semaforo();
+    Semaforo(byte r, byte a, byte v, unit_t tv, unit_t ta);
     void begin(byte r, byte a, byte v, unit_t tv, unit_t ta);
     void allOn();
     void allOff();
@@ -68,6 +72,13 @@ class Semaforo
     unit_t getTimeOnV();
     unit_t getTimeOnA();
 };
+
+Semaforo::Semaforo() {}
+
+Semaforo::Semaforo(byte r, byte a, byte v, unit_t tv, unit_t ta)
+{
+  begin(r, a, v, tv, ta);
+}
 
 void Semaforo::begin(byte r, byte a, byte v, unit_t tv, unit_t ta)
 {
