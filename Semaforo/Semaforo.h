@@ -108,9 +108,17 @@ void Luz::begin(byte p)
   pinMode(pin, OUTPUT);
 }
 
-void Luz::on() {digitalWrite(pin, HIGH);}
+void Luz::on()
+{
+  digitalWrite(pin, HIGH);
+  estado = true;  
+}
 
-void Luz::off() {digitalWrite(pin, LOW);}
+void Luz::off()
+{
+  digitalWrite(pin, LOW);
+  estado = false;
+}
 
 boolean Luz::getEstado() {return estado;}
 
