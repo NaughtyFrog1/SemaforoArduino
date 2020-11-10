@@ -4,7 +4,13 @@
 typedef unsigned long unit_t; 
 
 
-//* LuzSemaforo -------------------------------------------------------------->
+
+/* ============================================================================
+  DECLARACIÓN DE LAS CLASES
+============================================================================ */
+
+
+//* Luz ---------------------------------------------------------------------->
 
 class Luz
 {
@@ -18,19 +24,6 @@ class Luz
     boolean getEstado();
 };
 
-void Luz::begin(byte p)
-{
-  pin = p;
-  estado = false;
-}
-
-void Luz::on() {digitalWrite(pin, HIGH);}
-
-void Luz::off() {digitalWrite(pin, LOW);}
-
-boolean Luz::getEstado() {return estado;}
-
-
 class LuzSemaforo : public Luz
 {
   private:
@@ -40,24 +33,6 @@ class LuzSemaforo : public Luz
     void begin(byte pin_luz, unit_t t);
     unit_t getTimeOn();
 };
-
-void LuzSemaforo::begin(byte pin_luz)
-{
-  pin = pin_luz;
-  time_on = 0;
-  estado = false;
-  pinMode(pin, OUTPUT);
-}
-
-void LuzSemaforo::begin(byte pin_luz, unit_t t)
-{
-  pin = pin_luz;
-  time_on = t;
-  estado = false;
-  pinMode(pin, OUTPUT);
-}
-
-unit_t LuzSemaforo::getTimeOn() {return time_on;}
 
 
 //* Semaforo ----------------------------------------------------------------->
@@ -79,6 +54,83 @@ class Semaforo
     unit_t getTimeOnV();
     unit_t getTimeOnA();
 };
+
+
+//* Esquina ------------------------------------------------------------------>
+
+class Esquina
+{
+  protected:
+    byte step;
+    unit_t last_step;
+  
+  public:
+    virtual void secuencia() = 0;
+};
+
+class EsquinaDos : public Esquina
+{
+  private:
+   Semaforo sem1, sem2;
+  public:
+    EsquinaDos(byte, byte, byte, unit_t, unit_t,
+               byte, byte, byte, unit_t, unit_t);
+    void secuencia();
+};
+
+class EsquinaCuatro : public Esquina
+{
+  private:
+   Semaforo sem1, sem2, sem3, sem4;
+  public:
+    EsquinaCuatro(byte, byte, byte, unit_t, unit_t,
+                  byte, byte, byte, unit_t, unit_t,
+                  byte, byte, byte, unit_t, unit_t,
+                  byte, byte, byte, unit_t, unit_t);
+    void secuencia();
+    void todasRojo();
+};
+
+
+
+/* ============================================================================
+  DEFINICIÓN DE LOS MÉTODOS
+============================================================================ */
+
+
+//* LUZ ---------------------------------------------------------------------->
+
+//· Luz
+
+void Luz::on() {digitalWrite(pin, HIGH);}
+
+void Luz::off() {digitalWrite(pin, LOW);}
+
+boolean Luz::getEstado() {return estado;}
+
+
+//· LuzSemaforo
+
+void LuzSemaforo::begin(byte pin_luz)
+{
+  pin = pin_luz;
+  time_on = 0;
+  estado = false;
+  pinMode(pin, OUTPUT);
+}
+
+void LuzSemaforo::begin(byte pin_luz, unit_t t)
+{
+  pin = pin_luz;
+  time_on = t;
+  estado = false;
+  pinMode(pin, OUTPUT);
+}
+
+unit_t LuzSemaforo::getTimeOn() {return time_on;}
+
+
+//* Semaforo ----------------------------------------------------------------->
 
 Semaforo::Semaforo() {}
 
@@ -134,31 +186,14 @@ void Semaforo::setRA()
 }
 
 unit_t Semaforo::getTimeOnA() {return ambar.getTimeOn();}
+
 unit_t Semaforo::getTimeOnV() {return verde.getTimeOn();}
 
 
-//* Esquina para dos semaforos ----------------------------------------------->
-
-class Esquina
-{
-  protected:
-    byte step;
-    unit_t last_step;
-  
-  public:
-    virtual void secuencia() = 0;
-};
+//* Esquina ------------------------------------------------------------------>
 
 
-class EsquinaDos : public Esquina
-{
-  private:
-   Semaforo sem1, sem2;
-  public:
-    EsquinaDos(byte, byte, byte, unit_t, unit_t,
-               byte, byte, byte, unit_t, unit_t);
-    void secuencia();
-};
+//· EsquinaDos
 
 EsquinaDos::EsquinaDos(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
                        byte r2, byte a2, byte v2, unit_t tv2, unit_t ta2
@@ -205,20 +240,7 @@ void EsquinaDos::secuencia()
 }
 
 
-//* Esquina para semáforo con cuatro luces ----------------------------------->
-
-class EsquinaCuatro : public Esquina
-{
-  private:
-   Semaforo sem1, sem2, sem3, sem4;
-  public:
-    EsquinaCuatro(byte, byte, byte, unit_t, unit_t,
-                  byte, byte, byte, unit_t, unit_t,
-                  byte, byte, byte, unit_t, unit_t,
-                  byte, byte, byte, unit_t, unit_t);
-    void secuencia();
-    void todasRojo();
-};
+//· EsquinaCuatro
 
 EsquinaCuatro::EsquinaCuatro (
   byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
