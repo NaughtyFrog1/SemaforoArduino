@@ -67,6 +67,21 @@ class Esquina
     virtual void secuencia() = 0;
 };
 
+class MuchiEsquinas : public Esquina
+{
+  private:
+    Semaforo sem[8];
+    byte cant_sem;
+    byte last_sem;
+    byte max_step;
+  
+  public:
+    MuchiEsquinas(byte c);
+    void setSemaforos(Semaforo s[]);
+    void secuencia();
+    void todasRojo();
+};
+
 class EsquinaDos : public Esquina
 {
   private:
@@ -197,6 +212,36 @@ unit_t Semaforo::getTimeOnV() {return verde.getTimeOn();}
 
 
 //* Esquina ------------------------------------------------------------------>
+
+//· MuchiEsquinas
+
+MuchiEsquinas::MuchiEsquinas(byte c)
+{
+  cant_sem = c;
+  max_step = (cant_sem * 2) - 1;
+  step = 0;
+  last_step = 0;
+}
+
+void MuchiEsquinas::setSemaforos(Semaforo s[])
+{ 
+  for (byte i = 0; i < cant_sem; i++)
+    sem[i] = s[i];
+}
+
+void MuchiEsquinas::todasRojo()
+{
+  for (byte i = 0; i < cant_sem; i++)
+    sem[i].setR();
+}
+
+void MuchiEsquinas::secuencia()
+{
+  sem[0].setV(); 
+  sem[1].setA();
+  sem[2].setRA();
+}
+
 
 //· EsquinaDos
 
@@ -335,5 +380,6 @@ void EsquinaCuatro::todasRojo()
   sem3.setR();
   sem4.setR();
 }
+
 
 #endif
