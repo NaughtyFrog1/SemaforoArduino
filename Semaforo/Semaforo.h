@@ -12,8 +12,7 @@ typedef unsigned long unit_t;
 
 //* Luz ---------------------------------------------------------------------->
 
-class Luz
-{
+class Luz {
   protected:
     byte pin;
     boolean estado;
@@ -24,8 +23,7 @@ class Luz
     boolean getEstado();
 };
 
-class LuzSemaforo : public Luz
-{
+class LuzSemaforo : public Luz {
   private:
     unit_t time_on;
   public:
@@ -36,8 +34,7 @@ class LuzSemaforo : public Luz
 
 //* Semaforo ----------------------------------------------------------------->
 
-class Semaforo
-{
+class Semaforo {
   private:
     LuzSemaforo ambar, verde;
     Luz rojo;
@@ -58,8 +55,7 @@ class Semaforo
 
 //* Esquina ------------------------------------------------------------------>
 
-class Esquina
-{
+class Esquina {
   protected:
     byte step;
     unit_t last_step;
@@ -67,8 +63,7 @@ class Esquina
     virtual void secuencia() = 0;
 };
 
-class MuchiEsquinas : public Esquina
-{
+class MuchiEsquinas : public Esquina {
   private:
     Semaforo sem[8];
     byte cant_sem;
@@ -82,8 +77,7 @@ class MuchiEsquinas : public Esquina
     void todasRojo();
 };
 
-class EsquinaDos : public Esquina
-{
+class EsquinaDos : public Esquina {
   private:
    Semaforo sem1, sem2;
   public:
@@ -92,8 +86,7 @@ class EsquinaDos : public Esquina
     void secuencia();
 };
 
-class EsquinaCuatro : public Esquina
-{
+class EsquinaCuatro : public Esquina {
   private:
    Semaforo sem1, sem2, sem3, sem4;
   public:
@@ -116,21 +109,18 @@ class EsquinaCuatro : public Esquina
 
 //· Luz
 
-void Luz::begin(byte p)
-{
+void Luz::begin(byte p) {
   pin = p;
   estado = false;
   pinMode(pin, OUTPUT);
 }
 
-void Luz::on()
-{
+void Luz::on() {
   digitalWrite(pin, HIGH);
   estado = true;  
 }
 
-void Luz::off()
-{
+void Luz::off() {
   digitalWrite(pin, LOW);
   estado = false;
 }
@@ -140,8 +130,7 @@ boolean Luz::getEstado() {return estado;}
 
 //· LuzSemaforo
 
-void LuzSemaforo::begin(byte p, unit_t t)
-{
+void LuzSemaforo::begin(byte p, unit_t t) {
   pin = p;
   time_on = t;
   estado = false;
@@ -155,52 +144,44 @@ unit_t LuzSemaforo::getTimeOn() {return time_on;}
 
 Semaforo::Semaforo() {}
 
-Semaforo::Semaforo(byte r, byte a, byte v, unit_t tv, unit_t ta)
-{
+Semaforo::Semaforo(byte r, byte a, byte v, unit_t tv, unit_t ta) {
   begin(r, a, v, tv, ta);
 }
 
-void Semaforo::begin(byte r, byte a, byte v, unit_t tv, unit_t ta)
-{
+void Semaforo::begin(byte r, byte a, byte v, unit_t tv, unit_t ta) {
   rojo.begin(r);
   ambar.begin(a, ta);
   verde.begin(v, tv);
 }
 
-void Semaforo::allOn()
-{
+void Semaforo::allOn() {
   rojo.on();
   ambar.on();
   verde.on();
 }
 
-void Semaforo::allOff()
-{
+void Semaforo::allOff() {
   rojo.off();
   ambar.off();
   verde.off();
 }
 
-void Semaforo::setR()
-{
+void Semaforo::setR() {
   allOff();
   rojo.on();
 }
 
-void Semaforo::setA()
-{
+void Semaforo::setA() {
   allOff();
   ambar.on();
 }
 
-void Semaforo::setV()
-{
+void Semaforo::setV() {
   allOff();
   verde.on();
 }
 
-void Semaforo::setRA()
-{
+void Semaforo::setRA() {
   allOff();
   rojo.on();
   ambar.on();
@@ -215,28 +196,25 @@ unit_t Semaforo::getTimeOnV() {return verde.getTimeOn();}
 
 //· MuchiEsquinas
 
-MuchiEsquinas::MuchiEsquinas(byte c)
-{
+MuchiEsquinas::MuchiEsquinas(byte c) {
   cant_sem = c;
   max_step = (cant_sem * 2) - 1;
   step = 0;
   last_step = 0;
+  last_sem = cant_sem - 1;
 }
 
-void MuchiEsquinas::setSemaforos(Semaforo s[])
-{ 
+void MuchiEsquinas::setSemaforos(Semaforo s[]) { 
   for (byte i = 0; i < cant_sem; i++)
     sem[i] = s[i];
 }
 
-void MuchiEsquinas::todasRojo()
-{
+void MuchiEsquinas::todasRojo() {
   for (byte i = 0; i < cant_sem; i++)
     sem[i].setR();
 }
 
-void MuchiEsquinas::secuencia()
-{
+void MuchiEsquinas::secuencia() {
   sem[0].setV(); 
   sem[1].setA();
   sem[2].setRA();
@@ -254,34 +232,29 @@ EsquinaDos::EsquinaDos(byte r1, byte a1, byte v1, unit_t tv1, unit_t ta1,
   last_step = 0;
 }
 
-void EsquinaDos::secuencia()
-{
-  if ((step == 0) && (millis() > (last_step + sem2.getTimeOnA())))
-  {
+void EsquinaDos::secuencia() {
+  if ((step == 0) && (millis() > (last_step + sem2.getTimeOnA()))) {
     sem1.setV();
     sem2.setR();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 1) && (millis() > (last_step + sem1.getTimeOnV())))
-  {
+  else if ((step == 1) && (millis() > (last_step + sem1.getTimeOnV()))) {
     sem1.setA();
     sem2.setRA();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 2) && (millis() > (last_step + sem1.getTimeOnA())))
-  {
+  else if ((step == 2) && (millis() > (last_step + sem1.getTimeOnA()))) {
     sem2.setV();
     sem1.setR();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 3) && (millis() > (last_step + sem2.getTimeOnV())))
-  {
+  else if ((step == 3) && (millis() > (last_step + sem2.getTimeOnV()))) {
     sem2.setA();
     sem1.setRA();
     step = 0;
@@ -306,66 +279,57 @@ EsquinaCuatro::EsquinaCuatro (
   last_step = 0;
 }
 
-void EsquinaCuatro::secuencia()
-{
-  if ((step == 0) && (millis() > (last_step + sem4.getTimeOnA())))
-  {
+void EsquinaCuatro::secuencia() {
+  if ((step == 0) && (millis() > (last_step + sem4.getTimeOnA()))) {
     sem1.setV();
     sem4.setR();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 1) && (millis() > (last_step + sem1.getTimeOnV())))
-  {
+  else if ((step == 1) && (millis() > (last_step + sem1.getTimeOnV()))) {
     sem1.setA();
     sem2.setRA();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 2) && (millis() > (last_step + sem1.getTimeOnA())))
-  {
+  else if ((step == 2) && (millis() > (last_step + sem1.getTimeOnA()))) {
     sem1.setR();
     sem2.setV();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 3) && (millis() > (last_step + sem2.getTimeOnV())))
-  {
+  else if ((step == 3) && (millis() > (last_step + sem2.getTimeOnV()))) {
     sem2.setA();
     sem3.setRA();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 4) && (millis() > (last_step + sem2.getTimeOnA())))
-  {
+  else if ((step == 4) && (millis() > (last_step + sem2.getTimeOnA()))) {
     sem2.setR();
     sem3.setV();
     step++;
     last_step = millis();
   }
   
-  else if ((step == 5) && (millis() > (last_step + sem3.getTimeOnV())))
-  {
+  else if ((step == 5) && (millis() > (last_step + sem3.getTimeOnV()))) {
     sem3.setA();
     sem4.setRA();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 6) && (millis() > (last_step + sem3.getTimeOnA())))
-  {
+  else if ((step == 6) && (millis() > (last_step + sem3.getTimeOnA()))) {
     sem3.setR();
     sem4.setV();
     step++;
     last_step = millis();
   }
 
-  else if ((step == 7) && (millis() > (last_step + sem4.getTimeOnV())))
-  {
+  else if ((step == 7) && (millis() > (last_step + sem4.getTimeOnV()))) {
     sem1.setRA();
     sem4.setA();
     step = 0;
@@ -373,8 +337,7 @@ void EsquinaCuatro::secuencia()
   }
 }
 
-void EsquinaCuatro::todasRojo()
-{
+void EsquinaCuatro::todasRojo() {
   sem1.setR();
   sem2.setR();
   sem3.setR();
