@@ -5,8 +5,9 @@
 
 
 
-/* MuchiEsquinas4 ----------------------------------------------------------->
-MuchiEsquinas esq(4);
+/* EsquinaSimple4 ------------------------------------------------------------>
+
+EsquinaSimple esq(4);
 
 void setup() { 
   TestConexiones conex( 14, 15, 16, 17, 18, 19, 12, 11, 10, 9, 8, 7);
@@ -27,8 +28,9 @@ void loop() {esq.secuencia();}
 /**/
 
 
-/* MuchiEsquinas3 ----------------------------------------------------------->
-MuchiEsquinas esq(3);
+/* EsquinaSimple3 ------------------------------------------------------------>
+
+EsquinaSimple esq(3);
 
 void setup() { 
   TestConexiones conex( 14, 15, 16, 17, 18, 19, 12, 11, 10, 9, 8, 7);
@@ -48,8 +50,9 @@ void loop() {esq.secuencia();}
 /**/
 
 
-//* MuchiEsquinas2x2 --------------------------------------------------------->
-MuchiEsquinas esq1(2), esq2(2);
+//* EsquinaSimple2x2 --------------------------------------------------------->
+
+EsquinaSimple esq1(2), esq2(2);
 
 void setup() { 
   TestConexiones conex( 14, 15, 16, 17, 18, 19, 12, 11, 10, 9, 8, 7);

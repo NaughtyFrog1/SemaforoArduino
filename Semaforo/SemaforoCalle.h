@@ -5,7 +5,7 @@
 
 
 
-class MuchiEsquinas : public Esquina {
+class EsquinaSimple : public Esquina {
   private:
     Semaforo sem[8];
     byte cant_sem;
@@ -14,16 +14,15 @@ class MuchiEsquinas : public Esquina {
     byte max_step;
   
   public:
-    MuchiEsquinas(byte c);
+    EsquinaSimple(byte c);
     void setSemaforos(Semaforo s[]);
     void secuencia();
     void todasRojo();
 };
 
 
-//· MuchiEsquinas
 
-MuchiEsquinas::MuchiEsquinas(byte c) {
+EsquinaSimple::EsquinaSimple(byte c) {
   cant_sem = c;
   max_step = (cant_sem * 2) - 1;
   step = 0;
@@ -32,17 +31,17 @@ MuchiEsquinas::MuchiEsquinas(byte c) {
   last_sem = cant_sem - 1;
 }
 
-void MuchiEsquinas::setSemaforos(Semaforo s[]) { 
+void EsquinaSimple::setSemaforos(Semaforo s[]) { 
   for (byte i = 0; i < cant_sem; i++)
     sem[i] = s[i];
 }
 
-void MuchiEsquinas::todasRojo() {
+void EsquinaSimple::todasRojo() {
   for (byte i = 0; i < cant_sem; i++)
     sem[i].setR();
 }
 
-void MuchiEsquinas::secuencia() {
+void EsquinaSimple::secuencia() {
   for (byte stp = 0; stp <= max_step; stp += 2) {
     if ( 
       (step == stp)
@@ -74,5 +73,6 @@ void MuchiEsquinas::secuencia() {
     curr_sem = 0;
   }
 }
+
 
 #endif
