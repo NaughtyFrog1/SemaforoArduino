@@ -5,6 +5,9 @@
 
 
 
+// DECLARACIÓN DE LAS CLASES ------------------------------------------------->
+
+
 class EsquinaSimple : public Esquina {
   private:
     Semaforo sem[8];

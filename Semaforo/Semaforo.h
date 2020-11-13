@@ -30,7 +30,6 @@ class LuzSemaforo : public Luz {
 };
 
 
-
 class Semaforo {
   private:
     LuzSemaforo ambar, verde;

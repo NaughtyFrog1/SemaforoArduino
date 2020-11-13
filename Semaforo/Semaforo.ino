@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "SemaforoCalle.h"
+#include "EsquinaSimple.h"
 #include "SemaforoPeatonal.h"
 #include "Tests.h"
 
