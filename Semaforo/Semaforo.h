@@ -10,8 +10,6 @@ typedef unsigned long unit_t;
 ============================================================================ */
 
 
-//* Luz ---------------------------------------------------------------------->
-
 class Luz {
   protected:
     byte pin;
@@ -32,7 +30,6 @@ class LuzSemaforo : public Luz {
 };
 
 
-//* Semaforo ----------------------------------------------------------------->
 
 class Semaforo {
   private:
@@ -53,8 +50,6 @@ class Semaforo {
 };
 
 
-//* Esquina ------------------------------------------------------------------>
-
 class Esquina {
   protected:
     byte step;
@@ -64,29 +59,12 @@ class Esquina {
     virtual void todasRojo();
 };
 
-class MuchiEsquinas : public Esquina {
-  private:
-    Semaforo sem[8];
-    byte cant_sem;
-    byte curr_sem;
-    byte last_sem;
-    byte max_step;
-  
-  public:
-    MuchiEsquinas(byte c);
-    void setSemaforos(Semaforo s[]);
-    void secuencia();
-    void todasRojo();
-};
-
 
 
 /* ============================================================================
   DEFINICIÓN DE LOS MÉTODOS
 ============================================================================ */
 
-
-//* LUZ ---------------------------------------------------------------------->
 
 //· Luz
 
@@ -121,7 +99,7 @@ void LuzSemaforo::begin(byte p, unit_t t) {
 unit_t LuzSemaforo::getTimeOn() {return time_on;}
 
 
-//* Semaforo ----------------------------------------------------------------->
+//· Semaforo
 
 Semaforo::Semaforo() {}
 
@@ -171,63 +149,6 @@ void Semaforo::setRA() {
 unit_t Semaforo::getTimeOnA() {return ambar.getTimeOn();}
 
 unit_t Semaforo::getTimeOnV() {return verde.getTimeOn();}
-
-
-//* Esquina ------------------------------------------------------------------>
-
-//· MuchiEsquinas
-
-MuchiEsquinas::MuchiEsquinas(byte c) {
-  cant_sem = c;
-  max_step = (cant_sem * 2) - 1;
-  step = 0;
-  last_step = 0;
-  curr_sem = 0;
-  last_sem = cant_sem - 1;
-}
-
-void MuchiEsquinas::setSemaforos(Semaforo s[]) { 
-  for (byte i = 0; i < cant_sem; i++)
-    sem[i] = s[i];
-}
-
-void MuchiEsquinas::todasRojo() {
-  for (byte i = 0; i < cant_sem; i++)
-    sem[i].setR();
-}
-
-void MuchiEsquinas::secuencia() {
-  for (byte stp = 0; stp <= max_step; stp += 2) {
-    if ( 
-      (step == stp)
-      && (millis() > last_step + sem[last_sem].getTimeOnA())
-    ){
-      sem[curr_sem].setV();
-      sem[last_sem].setR();
-
-      step++;
-      last_step = millis();
-    }
-
-    else if (
-      (step == stp + 1)
-      && (millis() > last_step + sem[curr_sem].getTimeOnV())
-    ){
-      sem[curr_sem].setA();
-      sem[(curr_sem + 1) % cant_sem].setRA();
-
-      step++;
-      last_step = millis();
-      last_sem = curr_sem;
-      curr_sem++;
-    }
-  }
-  if (step > max_step) {
-    step = 0;
-    last_sem = cant_sem - 1;
-    curr_sem = 0;
-  }
-}
 
 
 #endif

@@ -1,6 +1,8 @@
 #include <Arduino.h>
-#include "Semaforo.h"
+#include "SemaforoCalle.h"
+#include "SemaforoPeatonal.h"
 #include "Tests.h"
+
 
 
 /* MuchiEsquinas4 ----------------------------------------------------------->
@@ -44,6 +46,7 @@ void setup() {
 
 void loop() {esq.secuencia();}
 /**/
+
 
 //* MuchiEsquinas2x2 --------------------------------------------------------->
 MuchiEsquinas esq1(2), esq2(2);
