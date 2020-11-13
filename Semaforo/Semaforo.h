@@ -60,7 +60,8 @@ class Esquina {
     byte step;
     unit_t last_step;
   public:
-    virtual void secuencia() = 0;
+    virtual void secuencia();
+    virtual void todasRojo();
 };
 
 class MuchiEsquinas : public Esquina {
