@@ -1,5 +1,5 @@
-#ifndef SemaforoCalle_h
-#define SemaforoCalle_h
+#ifndef EsquinaSimple_h
+#define EsquinaSimple_h
 
 #include "Semaforo.h"
 

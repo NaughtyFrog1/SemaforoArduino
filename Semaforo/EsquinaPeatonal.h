@@ -1,5 +1,5 @@
-#ifndef SemaforoPeatonal_h
-#define SemaforoPeatonal_h
+#ifndef EsquinaPeatonal_h
+#define EsquinaPeatonal_h
 
 #include "Semaforo.h"
 
