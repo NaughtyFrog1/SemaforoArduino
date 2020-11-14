@@ -4,8 +4,30 @@
 #include "Semaforo.h"
 
 
+// DEFINICIÓN DE LAS CLASES -------------------------------------------------->
 
-// Code...
+class SemaforoPeatonal {
+  public:
+    SemaforoPeatonal();
+    void begin();
+    void setCruce();
+    void setNoCruce();
+}; 
+
+class EsquinaPeatonal : public Esquina {
+  private:
+    SemaforoPeatonal semP[8];
+  public:
+    EsquinaPeatonal(byte c);
+    void setSemaforos(Semaforo s[]);
+    void setPeatonales(Luz l[]);
+    
+    void secuencia();
+    void todasRojo();
+};
+
+
+// DECLARACIÓN DE LOS MÉTODOS ------------------------------------------------>
 
 
 #endif
