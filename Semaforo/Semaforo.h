@@ -51,6 +51,11 @@ class Semaforo {
 
 class Esquina {
   protected:
+    Semaforo sem[8];
+    byte cant_sem;
+    byte curr_sem;
+    byte last_sem;
+    byte max_step;
     byte step;
     unit_t last_step;
   public:

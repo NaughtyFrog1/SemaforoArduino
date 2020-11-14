@@ -9,13 +9,6 @@
 
 
 class EsquinaSimple : public Esquina {
-  private:
-    Semaforo sem[8];
-    byte cant_sem;
-    byte curr_sem;
-    byte last_sem;
-    byte max_step;
-  
   public:
     EsquinaSimple(byte c);
     void setSemaforos(Semaforo s[]);
