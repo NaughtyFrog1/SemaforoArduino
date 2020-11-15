@@ -21,7 +21,7 @@
 #ifndef Semaforo_h
 #define Semaforo_h
 
-// Definimos un nombre alternativo al tipo de dato que retorna millis()
+// Definir un nombre alternativo al tipo de dato que retorna millis()
 typedef unsigned long unit_t; 
 
 
