@@ -6,6 +6,7 @@
   esquina y múltiples esquinas a la vez, sin hacer uso de semáforos peatonales
 */
 
+
 #ifndef EsquinaSimple_h
 #define EsquinaSimple_h
 

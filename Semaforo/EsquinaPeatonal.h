@@ -4,7 +4,9 @@
 #include "Semaforo.h"
 
 
+
 // DEFINICIÓN DE LAS CLASES -------------------------------------------------->
+
 
 class SemaforoPeatonal {
   public:
@@ -27,7 +29,11 @@ class EsquinaPeatonal : public Esquina {
 };
 
 
+
 // DECLARACIÓN DE LOS MÉTODOS ------------------------------------------------>
+
+
+// Code...
 
 
 #endif

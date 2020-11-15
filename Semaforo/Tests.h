@@ -4,6 +4,9 @@
 #include "Semaforo.h"
 
 
+
+// DEFINICIÓN DE LAS CLASES -------------------------------------------------->
+
 class TestConexiones
 {
   private:
@@ -17,6 +20,10 @@ class TestConexiones
     );
     void testAll();
 };
+
+
+
+// DECLARACIÓN DE LOS MÉTODOS ------------------------------------------------>
 
 TestConexiones::TestConexiones(
   byte r1, byte a1, byte v1, 
