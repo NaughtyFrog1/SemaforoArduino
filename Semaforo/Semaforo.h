@@ -7,10 +7,14 @@
   En este archivo se definen cuatro clases: Luz, LuzSemaforo, Semaforo y
   Esquina.
 
-  A la hora de crear nuevas funcionalidades no se debería tener la necesidad de
-  realizar cambios en este archivo, pudiendo así garantizar que los cambios
-  hechos en una parte del programa no afectarán al funcionamiento de las demás
-  clases.
+  NOTA 1: A la hora de crear nuevas funcionalidades no se debería tener la
+  necesidad de realizar cambios en este archivo, pudiendo así garantizar que
+  los cambios hechos en una parte del programa no afectarán al funcionamiento
+  de las demás clases.
+
+  NOTA 2: Algunas variables son referidas como flags, eso indica que el usuario
+  no debe asignarles ningún valor directamente, si no que su valor depende del
+  valor de otras variables o del flujo/estado del programa
 */
 
 
@@ -75,12 +79,18 @@ class Esquina {
     // Semáforos que debe controlar la esquina. El máximo de 8 es una elección
     // arbitraria que surge por la falta de arrays dinámicos.
     Semaforo sem[8];
-    byte cant_sem;     // Cantidad de semáforos que tiene la esquina
-    byte curr_sem;     // Indice del semáforo que se debe modificar
-    byte last_sem;     // Indice del último semáforo en ser modificado
-    byte step;         // Registro de en que paso de la secuencia esta
-    byte max_step;     // Cantidad de pasos que tiene la secuencia
-    unit_t last_step;  // Tiempo en el que se produjo la última modificación
+    // Cantidad de semáforos que tiene la esquina
+    byte cant_sem;
+    // Flag que indica el indice del semáforo que se debe modificar
+    byte curr_sem; 
+    // Flag que indica el indice del último semáforo en ser modificado    
+    byte last_sem; 
+    // Flag que lleva el registro de en que paso de la secuencia está    
+    byte step;
+    // Flag que indica la cantidad de pasos que tiene la secuencia     
+    byte max_step;
+    // Flag que registra el tiempo en el que se produjo la última modificación
+    unit_t last_step;
   public:
     virtual void secuencia();
     virtual void todasRojo();
@@ -222,7 +232,7 @@ unit_t Semaforo::getTimeOnA() {
 
 unit_t Semaforo::getTimeOnV() {
   // Informar el tiempo que debe permanecer encendida la luz roja
-  
+
   return verde.getTimeOn();
 }
 
