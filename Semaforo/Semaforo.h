@@ -34,12 +34,10 @@ typedef unsigned long unit_t;
 class Luz {
   protected:
     byte pin;  // Pin donde va conectada la luz
-    boolean estado;  // Flag que permite conocer el estado de la luz
   public:
     void begin(byte p);
     void on();
     void off();
-    boolean isOn();
 };
 
 
@@ -109,7 +107,6 @@ void Luz::begin(byte p) {
   // Inicializar el objeto Luz e indicar a que pin va conectado.
 
   pin = p;
-  estado = false;
   pinMode(pin, OUTPUT);
 }
 
@@ -117,21 +114,14 @@ void Luz::on() {
   // Encender la luz
 
   digitalWrite(pin, HIGH);
-  estado = true;  
 }
 
 void Luz::off() {
   // Apagar la luz
 
   digitalWrite(pin, LOW);
-  estado = false;
 }
-
-boolean Luz::isOn() {
-  // Informar si la luz esta encendida o apagada
-
-  return estado;
-}  
+ 
 
 
 //· LuzSemaforo
@@ -142,7 +132,6 @@ void LuzSemaforo::begin(byte p, unit_t t) {
 
   pin = p;
   time_on = t;
-  estado = false;
   pinMode(pin, OUTPUT);
 }
 
