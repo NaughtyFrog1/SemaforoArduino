@@ -91,7 +91,7 @@ class Esquina {
     unit_t last_step;
   public:
     virtual void secuencia();
-    virtual void todasRojo();
+    virtual void init();
 };
 
 

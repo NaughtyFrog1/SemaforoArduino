@@ -37,7 +37,7 @@ class EsquinaPeatonal : public Esquina {
     EsquinaPeatonal(byte c);
     void setSemaforos(Semaforo s[], SemaforoPeatonal p[]);
     void secuencia();
-    void todasRojo();
+    void init();
 };
 
 
@@ -98,7 +98,7 @@ void EsquinaPeatonal::setSemaforos(Semaforo s[], SemaforoPeatonal p[]) {
   }
 }
 
-void EsquinaPeatonal::todasRojo() {
+void EsquinaPeatonal::init() {
   for (byte i = 0; i < cant_sem; i++) {
     sem[i].setR();
     semP[i].setCruce();

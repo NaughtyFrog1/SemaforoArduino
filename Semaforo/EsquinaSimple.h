@@ -22,7 +22,7 @@ class EsquinaSimple : public Esquina {
     EsquinaSimple(byte c);
     void setSemaforos(Semaforo s[]);
     void secuencia();
-    void todasRojo();
+    void init();
 };
 
 
@@ -51,7 +51,7 @@ void EsquinaSimple::setSemaforos(Semaforo s[]) {
     sem[i] = s[i];
 }
 
-void EsquinaSimple::todasRojo() {
+void EsquinaSimple::init() {
   // Poner en rojo todos los semáforos de la esquina
 
   for (byte i = 0; i < cant_sem; i++)

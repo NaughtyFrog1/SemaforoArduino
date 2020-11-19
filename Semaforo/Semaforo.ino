@@ -20,7 +20,7 @@ void setup() {
   esq.setSemaforos(conexiones);
 
   conex.testAll();
-  esq.todasRojo();
+  esq.init();
 }
 
 void loop() {esq.secuencia();}
@@ -49,7 +49,7 @@ void setup() {
   esq.setSemaforos(conexiones);
 
   conex.testAll();
-  esq.todasRojo();
+  esq.init();
 }
 
 void loop() {esq.secuencia();}
@@ -81,8 +81,8 @@ void setup() {
   esq2.setSemaforos(lista_sem);
 
   conex.testAll();
-  esq1.todasRojo();
-  esq2.todasRojo();
+  esq1.init();
+  esq2.init();
 }
 
 void loop() {
@@ -116,7 +116,7 @@ void setup() {
   esq.setSemaforos(lista_sem, lista_semP);
 
   conex.testAll();
-  esq.todasRojo();  
+  esq.init();  
 }
 
 void loop() { esq.secuencia(); }
