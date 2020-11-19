@@ -123,6 +123,7 @@ void loop() { esq.secuencia(); }
 EsquinaSimple   esqAv(4);  // Intersección de 4 calles (2 avenidas)
 EsquinaPeatonal esq(2);    // Interseccion de 2 calles con cruce peatonal
 
+
 void setup() {
   // Declaramos los distintos array que usaremos para pasar como argumento
 
@@ -161,6 +162,7 @@ void setup() {
   esqAv.init();
   esq.init();  
 }
+
 
 void loop() {
   // Controlar la secuencia de las dos esquinas en forma simultanea
