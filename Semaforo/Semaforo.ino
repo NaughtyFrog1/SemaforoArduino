@@ -139,16 +139,16 @@ void setup() {
         SemaforoPeatonal(pin_no_cruce, pin_cruce)
   */
 
-  lista_av[0] = Semaforo(/* pin, pin, pin, t, t */);
-  lista_av[1] = Semaforo(/* pin, pin, pin, t, t */);
-  lista_av[2] = Semaforo(/* pin, pin, pin, t, t */);
-  lista_av[3] = Semaforo(/* pin, pin, pin, t, t */);
+  lista_av[0] = Semaforo(4, 3, 2, 20000, 5000);
+  lista_av[1] = Semaforo(7, 6, 5, 20000, 5000);
+  lista_av[2] = Semaforo(10, 9, 8, 20000, 5000);
+  lista_av[3] = Semaforo(13, 12, 11, 20000, 5000);
 
-  lista_sem[0] = Semaforo(/* pin, pin, pin, t, t */);
-  lista_sem[1] = Semaforo(/* pin, pin, pin, t, t */);
+  lista_sem[0] = Semaforo(14, 15, 16, 15000, 3000);
+  lista_sem[1] = Semaforo(17, 18, 19, 15000, 3000);
   
-  lista_semP[0] = SemaforoPeatonal(/* pin, pin */);
-  lista_semP[1] = SemaforoPeatonal(/* pint, pin */);
+  lista_semP[0] = SemaforoPeatonal(20, 21);
+  lista_semP[1] = SemaforoPeatonal(22, 23);
 
 
   // Indicamos que semáforos debera usar cada esquina
