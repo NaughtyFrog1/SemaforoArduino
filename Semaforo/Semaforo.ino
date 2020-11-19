@@ -120,8 +120,8 @@ void loop() { esq.secuencia(); }
 
 // Creamos las esquinas que deberá controlar el Arduino
 
-EsquinaSimple   esqAv(4);  // Intersección de 4 calles (2 avenidas)
-EsquinaPeatonal esq(2);    // Interseccion de 2 calles con cruce peatonal
+EsquinaSimple esqAv(4);  // Intersección de 4 calles (2 avenidas)
+EsquinaPeatonal esq(2);  // Interseccion de 2 calles con cruce peatonal
 
 
 void setup() {
@@ -139,9 +139,9 @@ void setup() {
         SemaforoPeatonal(pin_no_cruce, pin_cruce)
   */
 
-  lista_av[0] = Semaforo(4, 3, 2, 20000, 5000);
-  lista_av[1] = Semaforo(7, 6, 5, 20000, 5000);
-  lista_av[2] = Semaforo(10, 9, 8, 20000, 5000);
+  lista_av[0] = Semaforo( 4,  3,  2, 20000, 5000);
+  lista_av[1] = Semaforo( 7,  6,  5, 20000, 5000);
+  lista_av[2] = Semaforo(10,  9,  8, 20000, 5000);
   lista_av[3] = Semaforo(13, 12, 11, 20000, 5000);
 
   lista_sem[0] = Semaforo(14, 15, 16, 15000, 3000);
