@@ -84,7 +84,7 @@ void loop() {
 /**/
 
 
-//* EsquinaPeatonal2 --------------------------------------------------------->
+/* EsquinaPeatonal2 --------------------------------------------------------->
 EsquinaPeatonal esq(2);
 
 void setup() {
@@ -115,32 +115,52 @@ void loop() { esq.secuencia(); }
 /**/
 
 
-/* EsquinaMega -------------------------------------------------------------->
+//* EsquinaMega -------------------------------------------------------------->
+EsquinaSimple   esqAv(4);
 EsquinaPeatonal esq(2);
 
 void setup() {
-  Semaforo conexiones[4];
-  conexiones[0] = Semaforo(4, 3, 2, 3000, 1000);
-  conexiones[1] = Semaforo(7, 6, 5, 3000, 1000);
-  conexiones[2] = Semaforo(10, 9, 8, 4000, 1000);
-  conexiones[3] = Semaforo( 13, 12, 11, 4000, 1000);
+  // Declaramos los distintos array que usaremos para pasar como argumento
 
-  TestConexiones conex(4, conexiones);
-
-  Semaforo lista_sem[2];
-  SemaforoPeatonal lista_semP[2];
-
-  lista_sem[0] = Semaforo(14, 15, 16, 3000, 1000);
-  lista_sem[1] = Semaforo(17, 18, 19, 4000, 1000);
+  Semaforo lista_av[4];   // Para la avenida
+  Semaforo lista_sem[2];  // Para los semáforos de la intersección con peatonal
+  SemaforoPeatonal lista_semP[2];  // Cruces peatonales
   
-  lista_semP[0] = SemaforoPeatonal(20, 21);
-  lista_semP[1] = SemaforoPeatonal(22, 23);
+  /*
+    La forma en la que se crean los semáforos es la siguiente:
+      - Semáforos de calle:
+        Semaforo(pin_rojo, pin_ambar, pin_verde, tiempo_verde, tiempo_ambar)
+      - Semáforos peatonales:
+        SemaforoPeatonal(pin_no_cruce, pin_cruce)
+  */
 
+  lista_av[0] = Semaforo(/* pin, pin, pin, t, t */);
+  lista_av[1] = Semaforo(/* pin, pin, pin, t, t */);
+  lista_av[2] = Semaforo(/* pin, pin, pin, t, t */);
+  lista_av[3] = Semaforo(/* pin, pin, pin, t, t */);
+
+  lista_sem[0] = Semaforo(/* pin, pin, pin, t, t */);
+  lista_sem[1] = Semaforo(/* pin, pin, pin, t, t */);
+  
+  lista_semP[0] = SemaforoPeatonal(/* pin, pin */);
+  lista_semP[1] = SemaforoPeatonal(/* pint, pin */);
+
+
+  // Indicamos que semáforos debera usar cada esquina
+
+  esqAv.setSemaforos(lista_av);  
   esq.setSemaforos(lista_sem, lista_semP);
 
-  conex.testAll();
+
+  // Encendemos las luces rojas de todos los semáforos
+
+  esqAv.init();
   esq.init();  
 }
 
-void loop() { esq.secuencia(); }
+void loop() {
+  // Controlar la secuencia de las dos esquinas en forma simultanea
+  esqAv.secuencia();
+  esq.secuencia();
+}
 /**/
