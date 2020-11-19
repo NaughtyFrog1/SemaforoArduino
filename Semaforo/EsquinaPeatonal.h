@@ -101,7 +101,7 @@ void EsquinaPeatonal::setSemaforos(Semaforo s[], SemaforoPeatonal p[]) {
 void EsquinaPeatonal::init() {
   for (byte i = 0; i < cant_sem; i++) {
     sem[i].setR();
-    semP[i].setCruce();
+    semP[i].setNoCruce();
   }
   
 }
@@ -129,6 +129,7 @@ void EsquinaPeatonal::secuencia() {
       sem[curr_sem].setA();
       sem[(curr_sem + 1) % cant_sem].setRA();
 
+      semP[last_sem].setNoCruce();
       semP[(curr_sem + 1) % cant_sem].setNoCruce();
 
 
