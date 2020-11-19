@@ -21,6 +21,7 @@ class EsquinaSimple : public Esquina {
   public:
     EsquinaSimple(byte c);
     void setSemaforos(Semaforo s[]);
+    void setSemaforos(Semaforo s[], byte pos);
     void secuencia();
     void init();
 };
@@ -49,6 +50,19 @@ void EsquinaSimple::setSemaforos(Semaforo s[]) {
 
   for (byte i = 0; i < cant_sem; i++)
     sem[i] = s[i];
+}
+
+void EsquinaSimple::setSemaforos(Semaforo s[], byte pos) {
+  // Recibe como argumento un array con los Semaforos que debe utilizar para
+  // realizar la secuencia y el indice del que debe partir.
+
+  byte offset_cant = cant_sem + pos;
+  byte i = 0;
+
+  for (byte x = pos; x < offset_cant; x++) {
+    sem[i] = s[x];
+    i++;
+  }
 }
 
 void EsquinaSimple::init() {

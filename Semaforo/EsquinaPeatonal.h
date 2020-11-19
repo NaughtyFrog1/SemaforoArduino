@@ -37,6 +37,9 @@ class EsquinaPeatonal : public Esquina {
   public:
     EsquinaPeatonal(byte c);
     void setSemaforos(Semaforo s[], SemaforoPeatonal p[]);
+    void setSemaforos(
+      Semaforo s[], byte pos_s,  SemaforoPeatonal p[], byte pos_p
+    );
     void secuencia();
     void init();
 };
@@ -98,6 +101,25 @@ void EsquinaPeatonal::setSemaforos(Semaforo s[], SemaforoPeatonal p[]) {
     sem[i] = s[i];
     semP[i] = p[i];
   }
+}
+
+void EsquinaPeatonal::setSemaforos(
+  Semaforo s[], byte pos_s,  SemaforoPeatonal p[], byte pos_p
+){
+  byte offset_s = pos_s + cant_sem;
+  byte offset_p = pos_p + cant_sem;
+  byte i = 0;
+
+  for (byte x = pos_s; x < offset_s; x++) {
+    sem[i] = s[x];
+    i++;
+  }
+  i = 0;
+  for (byte x = pos_p; x < offset_p; x++) {
+    semP[i] = p[x];
+    i++;
+  }
+  
 }
 
 void EsquinaPeatonal::init() {

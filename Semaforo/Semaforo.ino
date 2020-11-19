@@ -69,16 +69,8 @@ void setup() {
 
   TestConexiones conex(4, conexiones);
 
-
-  Semaforo lista_sem[2];
-
-  lista_sem[0] = conexiones[0];
-  lista_sem[1] = conexiones[1];
-  esq1.setSemaforos(lista_sem);
-
-  lista_sem[0] = conexiones[2];
-  lista_sem[1] = conexiones[3];
-  esq2.setSemaforos(lista_sem);
+  esq1.setSemaforos(conexiones);
+  esq2.setSemaforos(conexiones, 2);
 
   conex.testAll();
   esq1.init();
