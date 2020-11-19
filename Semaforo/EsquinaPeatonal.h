@@ -33,6 +33,7 @@ class SemaforoPeatonal {
 class EsquinaPeatonal : public Esquina {
   private:
     SemaforoPeatonal semP[8];
+    byte next_sem;
   public:
     EsquinaPeatonal(byte c);
     void setSemaforos(Semaforo s[], SemaforoPeatonal p[]);
@@ -89,6 +90,7 @@ EsquinaPeatonal::EsquinaPeatonal(byte c) {
   step = 0;
   last_step = 0;
   curr_sem = 0;
+  next_sem = (curr_sem + 1) % cant_sem;
 }
 
 void EsquinaPeatonal::setSemaforos(Semaforo s[], SemaforoPeatonal p[]) {
@@ -127,15 +129,16 @@ void EsquinaPeatonal::secuencia() {
       && (millis() > last_step + sem[curr_sem].getTimeOnV())
     ){
       sem[curr_sem].setA();
-      sem[(curr_sem + 1) % cant_sem].setRA();
+      sem[next_sem].setRA();
 
       semP[last_sem].setNoCruce();
-      semP[(curr_sem + 1) % cant_sem].setNoCruce();
+      semP[next_sem].setNoCruce();
 
 
       last_sem = curr_sem;
       curr_sem++;
       step++;
+      next_sem = (curr_sem + 1) % cant_sem;
       last_step = millis();
     }
   }
