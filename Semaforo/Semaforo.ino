@@ -97,10 +97,10 @@ EsquinaPeatonal esq(2);
 
 void setup() {
   Semaforo conexiones[4];
-  conexiones[0] = Semaforo(14, 15, 16, 3000, 1000); 
-  conexiones[1] = Semaforo(17, 18, 19, 3000, 1000);
-  conexiones[2] = Semaforo(12, 11, 10, 4000, 1000);
-  conexiones[3] = Semaforo( 9, 8, 7, 4000, 1000);
+  conexiones[0] = Semaforo(4, 3, 2, 3000, 1000);
+  conexiones[1] = Semaforo(7, 6, 5, 3000, 1000);
+  conexiones[2] = Semaforo(10, 9, 8, 4000, 1000);
+  conexiones[3] = Semaforo( 13, 12, 11, 4000, 1000);
 
   TestConexiones conex(4, conexiones);
 
@@ -108,10 +108,10 @@ void setup() {
   SemaforoPeatonal lista_semP[2];
 
   lista_sem[0] = Semaforo(14, 15, 16, 3000, 1000);
-  lista_sem[1] = Semaforo(12, 11, 10, 4000, 1000);
+  lista_sem[1] = Semaforo(17, 18, 19, 4000, 1000);
   
-  lista_semP[0] = SemaforoPeatonal(17, 18);
-  lista_semP[1] = SemaforoPeatonal(9, 8);
+  lista_semP[0] = SemaforoPeatonal(20, 21);
+  lista_semP[1] = SemaforoPeatonal(22, 23);
 
   esq.setSemaforos(lista_sem, lista_semP);
 
